@@ -33,3 +33,9 @@ The fixed header shows the name, map trigger (desktop), and an intentionally dis
 The map loads only when opened. Room names, descriptions, coordinates, and map copy are in `src/data.js`. Native dialog semantics, explicit Tab wrapping, Escape handling, scroll locking, and trigger focus restoration support keyboard use. Real route links preserve modified-click/new-tab behavior. The current room includes project detail routes. Opening reveals the oath and unfolds original SVG parchment; route selection traces a dotted path before navigating; closing folds the map and briefly displays “Mischief managed.” Reduced motion opens and closes instantly without ink or footprint animation.
 
 Footer route links remain visible on every page and highlight the active route. Below 640px and in Muggle Mode, the header links to that list instead of loading the map.
+
+## Spell Book projects
+
+`projects` in `src/data.js` holds the real title, creative spell name, effect, stack, tags, GitHub URL, contributor status, resume bullets, incantation TODO, and SVG node/edge definition for each project. No API paths or runnable project code were supplied, so incantations explicitly remain TODO with non-executable flow notes. Numerical achievement/storage counts are omitted under the no-metrics constraint.
+
+Filters use `?tag=ai-ml`, `?tag=cloud`, `?tag=security`, and `?tag=full-stack`; unknown tags show an empty state. Vaultify's native flip button supports click, Enter, and Space. Muggle Mode/reduced motion exposes its bullets directly, disables layout motion, and renders static diagrams. The details include per-project titles and descriptions, copy feedback, ordered diagram alternatives, contributor attribution, PRAHARI team and win, and previous/next links.
