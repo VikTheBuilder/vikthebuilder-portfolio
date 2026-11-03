@@ -15,4 +15,12 @@ export const award={name:'Aarohan Hackathon',event:'Techfest, IIT Bombay',date:'
 export const achievements=[{title:'Hackathon finalist',description:'Collegiate and national-level competitions.'},{title:'DSA practice',description:'Solving data structures and algorithms problems on LeetCode.'}];
 export const navigation=[{path:'/',label:'Home',room:'Acceptance Letter'},{path:'/about',label:'About',room:'Great Hall'},{path:'/projects',label:'Projects',room:'Spell Book'},{path:'/skills',label:'Skills',room:'Ollivanders'},{path:'/trophies',label:'Trophies',room:'Trophy Room'},{path:'/journey',label:'Journey',room:'Hogwarts Express'},{path:'/contact',label:'Contact',room:'Owl Post'}];
 export const timeline=[{date:'August 2024',title:'The journey begins',description:`Began ${education.degree} at ${education.school}.`},{date:award.date,title:`${award.result} · ${award.name}`,description:`${award.event}, with ${award.project}.`},{date:'August 2028 · expected',title:'B.Tech completion',description:education.school},{date:'Next destination',title:'An engineering role',description:profile.seeking}];
-
+export const home={
+  eyebrow:'CODE WITH COURAGE. BUILD WITH PURPOSE.',
+  role:'Full-stack CS student · Cloud-native applications · AI/ML',
+  intro:{eyebrow:'THE DEVELOPER’S CHRONICLE',title:'To The Hiring Team',lines:profile.summary[0].split(/(?<=[.!?])\s+/),seal:'Open the acceptance letter',sealMark:'V',skip:'Skip intro',signature:profile.name},
+  ctas:[{label:'Open the Spell Book',path:'/projects',rune:'◇'},{label:'Meet the Wizard',path:'/about',rune:'✦'},{label:'Send an Owl',path:'/contact',rune:'↗'}],
+  runes:['React','Flask','Node.js','AWS','Python'],runeLabel:'Core technologies',
+  winner:`${award.name} ${award.result}, ${award.event.replace(',','')}, ${award.date.replace('December','Dec')}`,
+  art:{top:'THE BUILDER',words:['COURAGE','& CURIOSITY'],bottom:'REACT · CLOUD · AI',note:'Built with intent. Bound by curiosity.'}
+};

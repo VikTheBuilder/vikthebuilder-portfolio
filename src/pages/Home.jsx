@@ -1,6 +1,35 @@
-import {useState} from 'react';
+import {useEffect,useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Page,Reveal,readSetting,saveSetting} from '../components/Motion';
+import {Page,useSettings} from '../components/Motion';
 import HeroArt from '../components/HeroArt';
-import {profile} from '../data';
-export default function Home(){const [letter,setLetter]=useState(()=>readSetting('acceptance-read','false')!=='true');function enter(){saveSetting('acceptance-read','true');setLetter(false);requestAnimationFrame(()=>document.querySelector('main h1')?.focus())}return <Page title={letter?'Your acceptance letter':profile.name} eyebrow="CODE WITH COURAGE. BUILD WITH PURPOSE." className="home-page">{letter?<Reveal><article className="acceptance"><span className="letter-seal" aria-hidden="true">V</span><p className="eyebrow">AN INVITATION TO EXPLORE</p><h2>Dear curious visitor,</h2><p>You are warmly invited to explore the developer’s chronicle of {profile.name} — a collection of software, cloud, and AI/ML work, built with courage and curiosity.</p><p>The Great Hall holds the story. The Spell Book holds the projects. Your next chapter starts here.</p><p className="letter-signature">{profile.handle}</p><button className="button primary" onClick={enter}>Open the gates →</button><button className="text-button" onClick={enter}>Skip introduction</button></article></Reveal>:<div className="hero-grid"><Reveal><p className="hero-role">{profile.role}<br/>{profile.tagline}</p><p className="hero-copy">{profile.intro}</p><div className="hero-actions"><Link className="button primary" to="/projects">Explore my work →</Link><Link className="button secondary" to="/contact">Let’s connect ↗</Link></div><p className="location">⌖ {profile.location}</p><Link className="repo-link" to="/about">The story continues →</Link></Reveal><HeroArt/></div>}</Page>}
+import AcceptanceLetter from '../components/AcceptanceLetter';
+import Embers from '../components/Embers';
+import {profile,home} from '../data';
+
+const sessionKey='portfolio-acceptance-dismissed';
+let dismissedInMemory=false;
+function wasDismissed(){try{return sessionStorage.getItem(sessionKey)==='true'||dismissedInMemory}catch{return dismissedInMemory}}
+function remember(){dismissedInMemory=true;try{sessionStorage.setItem(sessionKey,'true')}catch{/* In-memory fallback when storage is blocked. */}}
+export default function Home(){
+  const {quiet}=useSettings();
+  const [dismissed,setDismissed]=useState(wasDismissed);
+  useEffect(()=>{if(quiet){remember();setDismissed(true)}},[quiet]);
+  function dismiss(){remember();setDismissed(true);requestAnimationFrame(()=>document.querySelector('main h1')?.focus({preventScroll:true}))}
+  return <>
+    <Page title={profile.name} eyebrow={home.eyebrow} className="home-page landing-page">
+      <Embers/>
+      <div className="hero-grid">
+        <div className="landing-copy">
+          <p className="hero-role landing-role">{home.role}</p>
+          <p className="hero-copy">{profile.intro}</p>
+          <div className="wax-ctas">{home.ctas.map(cta=><Link className="wax-cta" to={cta.path} key={cta.path}><span className="cta-seal" aria-hidden="true">{cta.rune}</span><span>{cta.label}</span></Link>)}</div>
+          <ul className="badges rune-strip" aria-label={home.runeLabel}>{home.runes.map(rune=><li key={rune}><span aria-hidden="true">◇ </span>{rune}</li>)}</ul>
+          <Link className="winner-badge" to="/trophies"><span aria-hidden="true">✦</span>{home.winner}<span aria-hidden="true">↗</span></Link>
+          <p className="location">⌖ {profile.location}</p>
+        </div>
+        <HeroArt/>
+      </div>
+    </Page>
+    {!dismissed&&!quiet&&<AcceptanceLetter onDismiss={dismiss}/>}
+  </>;
+}
