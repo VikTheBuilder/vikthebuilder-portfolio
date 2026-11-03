@@ -25,3 +25,11 @@ Numerical achievements and CGPA are omitted to follow the no-metrics requirement
 ## Accessibility and performance
 
 Semantic landmarks, skip link, native keyboard controls, visible focus states, named SVG diagrams, reduced-motion support, mobile menu with expanded state, and local fonts. Run Lighthouse against a production preview to verify the requested 90+ target; do not treat implementation choices as a measured score.
+
+## Marauder’s Map navigation
+
+The fixed header shows the name, map trigger (desktop), and an intentionally disabled Lumos/Nox placeholder. The previous light-mode preference remains supported by the design system for later wiring. Muggle Mode is available in the footer.
+
+The map loads only when opened. Room names, descriptions, coordinates, and map copy are in `src/data.js`. Native dialog semantics, explicit Tab wrapping, Escape handling, scroll locking, and trigger focus restoration support keyboard use. Real route links preserve modified-click/new-tab behavior. The current room includes project detail routes. Opening reveals the oath and unfolds original SVG parchment; route selection traces a dotted path before navigating; closing folds the map and briefly displays “Mischief managed.” Reduced motion opens and closes instantly without ink or footprint animation.
+
+Footer route links remain visible on every page and highlight the active route. Below 640px and in Muggle Mode, the header links to that list instead of loading the map.

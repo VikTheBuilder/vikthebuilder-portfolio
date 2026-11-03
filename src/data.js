@@ -24,3 +24,13 @@ export const home={
   winner:`${award.name} ${award.result}, ${award.event.replace(',','')}, ${award.date.replace('December','Dec')}`,
   art:{top:'THE BUILDER',words:['COURAGE','& CURIOSITY'],bottom:'REACT · CLOUD · AI',note:'Built with intent. Bound by curiosity.'}
 };
+export const mapCopy={title:'Marauder’s Map',oath:'I solemnly swear that I am up to no good',oathLines:['I solemnly swear that','I am up to no good'],managed:'Mischief managed',close:'Close map',here:'You are here',hint:'Choose a room to continue your journey.',footerLabel:'Explore the portfolio',loading:'Unfolding the map…'};
+export const mapRooms=[
+  {path:'/',room:'Home',description:'The introduction to Vikramaditya’s developer portfolio.',x:50,y:16},
+  {path:'/about',room:'Great Hall',description:'Summary, education, and professional certifications.',x:21,y:36},
+  {path:'/projects',room:'Spell Book',description:'Explore Vaultify, UnSpoken, Equilibria, and PRAHARI.',x:77,y:35},
+  {path:'/skills',room:'Ollivanders',description:'Languages, frameworks, cloud, security, and tools.',x:18,y:68},
+  {path:'/trophies',room:'Trophy Room',description:'The Aarohan win, achievements, and course scrolls.',x:50,y:51},
+  {path:'/journey',room:'Hogwarts Express',description:'Education and hackathon milestones along the journey.',x:49,y:85},
+  {path:'/contact',room:'Owl Post',description:'Get in touch, find profile links, and download the resume.',x:81,y:71}
+];

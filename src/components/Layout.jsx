@@ -1,11 +1,36 @@
-import {useEffect,useRef,useState} from 'react';
+import {lazy,Suspense,useEffect,useRef,useState} from 'react';
 import {Link,NavLink,useLocation} from 'react-router-dom';
-import {motion} from 'framer-motion';
-import {links,navigation,profile} from '../data';
+import {links,navigation,profile,mapCopy} from '../data';
 import {useSettings} from './Motion';
-import Footprints from './Footprints';
-export default function Layout({children}){const {pathname}=useLocation();const dialog=useRef(null);const trigger=useRef(null);const [open,setOpen]=useState(false);const {quiet,muggle,setMuggle,light,setLight}=useSettings();function close(restore=true){dialog.current?.close();setOpen(false);if(restore)trigger.current?.focus()}
-useEffect(()=>{if(dialog.current?.open)close(false)},[pathname]);
-function show(){dialog.current.showModal();setOpen(true)}
-return <><a className="skip" href="#main">Skip to content</a><header><Link className="brand" to="/" aria-label="VikTheBuilder home"><span className="monogram">V</span><span>{profile.handle}<span className="brand-sub">THE DEVELOPER'S CHRONICLE</span></span></Link><div className="header-controls"><button onClick={()=>setLight(!light)} aria-pressed={light}>{light?'Nox · dark':'Lumos · light'}</button><button onClick={()=>setMuggle(!muggle)} aria-pressed={muggle}>Muggle Mode {muggle?'on':'off'}</button><button ref={trigger} onClick={show} aria-haspopup="dialog" aria-expanded={open}>Marauder’s Map</button></div></header><nav className="plain-nav" aria-label="Main navigation">{navigation.map(n=><NavLink key={n.path} to={n.path} end={n.path==='/'}>{n.label}</NavLink>)}</nav><dialog ref={dialog} className="map-dialog" aria-labelledby="map-title" onCancel={()=>close()} onClick={e=>{if(e.target===e.currentTarget)close()}}><div className="map-paper"><button className="map-close" onClick={()=>close()} autoFocus>Close map ×</button><p className="eyebrow">FIND YOUR NEXT CHAPTER</p><h2 id="map-title">Marauder’s Map</h2><nav className="map-links" aria-label="Marauder’s Map navigation">{navigation.map(n=><NavLink key={n.path} to={n.path} end={n.path==='/'} onClick={()=>{if(pathname===n.path)close()}}><span>{n.room}</span><small>{n.label}</small>{(pathname===n.path||(n.path==='/projects'&&pathname.startsWith('/projects/')))&&<motion.span className="footprints" layoutId={quiet?undefined:'map-footprints'} initial={false} animate={quiet?{x:0}:{x:[-10,0]}} aria-hidden="true"><Footprints/></motion.span>}</NavLink>)}</nav><p className="muted">Every path leads to something built with purpose.</p></div></dialog><div className="route-trail" aria-hidden="true">{navigation.map(n=><span key={n.path}>{(pathname===n.path||(n.path==='/projects'&&pathname.startsWith('/projects/')))&&<motion.span layoutId={quiet?undefined:'route-footsteps'} transition={{duration:quiet?0:.35}} className="trail-feet"><Footprints/></motion.span>}</span>)}</div><main id="main">{children}</main><footer className="section-wrap"><span>{profile.name} <span className="muted">/ {profile.handle}</span></span><div className="socials">{links.map(([label,url])=><a key={label} href={url} target="_blank" rel="noreferrer" aria-label={`${label} (opens new tab)`}>{label} ↗</a>)}</div><span>An original Gryffindor-inspired portfolio.</span></footer></>}
+const MaraudersMap=lazy(()=>import('./MaraudersMap'));
 
+export default function Layout({children}){
+  const {pathname}=useLocation();
+  const trigger=useRef(null);
+  const restorePath=useRef(null),readyPath=useRef(null),openRef=useRef(false);
+  const fallback=useRef(null);
+  const [open,setOpen]=useState(false);
+  const [small,setSmall]=useState(()=>window.matchMedia('(max-width: 639px)').matches);
+  const {muggle,setMuggle,light}=useSettings();
+  const plain=small||muggle;
+  useEffect(()=>{const query=window.matchMedia('(max-width: 639px)');const update=()=>setSmall(query.matches);query.addEventListener('change',update);return()=>query.removeEventListener('change',update)},[]);
+  useEffect(()=>{if(plain&&open){setOpen(false);requestAnimationFrame(()=>fallback.current?.focus())}},[plain,open]);
+  useEffect(()=>{const ready=event=>{readyPath.current=event.detail;if(restorePath.current===event.detail&&!openRef.current){trigger.current?.focus({preventScroll:true});restorePath.current=null}};window.addEventListener('portfolio:page-ready',ready);return()=>window.removeEventListener('portfolio:page-ready',ready)},[]);
+  function dismiss(){openRef.current=false;setOpen(false);requestAnimationFrame(()=>trigger.current?.focus({preventScroll:true}));if(readyPath.current===restorePath.current)restorePath.current=null}
+  return <>
+    <a className="skip" href="#main">Skip to content</a>
+    <header className="map-header">
+      <Link className="header-name" to="/">{profile.name}</Link>
+      <div className="header-controls">
+        {plain?<a ref={fallback} className="footer-nav-trigger" href="#footer-navigation">Navigation ↓</a>:<button ref={trigger} onClick={()=>{openRef.current=true;setOpen(true)}} aria-haspopup="dialog" aria-expanded={open}>{mapCopy.title}</button>}
+        <button disabled title="Lumos/Nox control — to be wired later" aria-label="Lumos/Nox placeholder">{light?'Nox · dark':'Lumos · light'}</button>
+      </div>
+    </header>
+    <main id="main">{children}</main>
+    <footer className="section-wrap map-footer">
+      <nav id="footer-navigation" className="footer-navigation" aria-label={mapCopy.footerLabel}>{navigation.map(n=><NavLink key={n.path} to={n.path} end={n.path==='/'}>{n.label}</NavLink>)}</nav>
+      <div className="footer-meta"><span>{profile.name} <span className="muted">/ {profile.handle}</span><button className="muggle-control" onClick={()=>setMuggle(!muggle)} aria-pressed={muggle}>Muggle Mode {muggle?'on':'off'}</button></span><div className="socials">{links.map(([label,url])=><a key={label} href={url} target="_blank" rel="noreferrer" aria-label={`${label} (opens new tab)`}>{label} ↗</a>)}</div><span>An original Gryffindor-inspired portfolio.</span></div>
+    </footer>
+    {open&&!plain&&<Suspense fallback={<div className="map-loading" role="status">{mapCopy.loading}<button onClick={dismiss}>{mapCopy.close}</button></div>}><MaraudersMap pathname={pathname} onDismiss={dismiss} onNavigate={path=>{restorePath.current=path}}/></Suspense>}
+  </>;
+}
