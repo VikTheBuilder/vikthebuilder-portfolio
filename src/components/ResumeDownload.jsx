@@ -1,0 +1,2 @@
+import {profile} from '../data';
+export default function ResumeDownload(){const available=Object.keys(import.meta.glob('/public/Vikramaditya_Singh_Resume.pdf')).length>0;return available?<a className="button secondary" href={profile.resume} download>Download resume ↓</a>:<span className="resume-wrap"><button className="button secondary" disabled>Download resume ↓</button><small>TODO: Add resume PDF</small></span>}

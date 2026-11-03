@@ -1,0 +1,7 @@
+import {Link,useParams} from 'react-router-dom';
+import {motion} from 'framer-motion';
+import {Page,Reveal,useSettings} from '../components/Motion';
+import ArchitectureDiagram from '../components/ArchitectureDiagram';
+import {projects,team} from '../data';
+import NotFound from './NotFound';
+export default function ProjectDetail(){const {slug}=useParams();const {quiet}=useSettings();const p=projects.find(p=>p.slug===slug);if(!p)return <NotFound/>;return <Page title={p.name} eyebrow={`SPELL BOOK · ${p.type}`}><Link className="back-link" to="/projects">← Back to all projects</Link><motion.article className="project project-detail" layoutId={quiet?undefined:`project-${p.slug}`}><p className="eyebrow">{p.category}{p.role?` · ${p.role}`:''}</p><Reveal><h2>Effect <span className="section-gloss">What it does</span></h2><p>{p.description}</p></Reveal><Reveal><h2>Wand movement <span className="section-gloss">How it works</span></h2><ul className="detail-list">{p.details.map(t=><li key={t}>{t}</li>)}</ul><ArchitectureDiagram nodes={p.nodes} caption={p.caption} animated/></Reveal><Reveal><h2>Incantation <span className="section-gloss">Technology stack</span></h2><ul className="badges">{p.stack.map(t=><li key={t}>{t}</li>)}</ul></Reveal>{slug==='prahari'&&<Reveal><h2>The team</h2><ul className="team-list">{team.map(name=><li key={name}>{name}</li>)}</ul></Reveal>}<a className="button primary" href={p.url} target="_blank" rel="noreferrer">View source on GitHub ↗ <span className="sr-only">(opens new tab)</span></a></motion.article></Page>}

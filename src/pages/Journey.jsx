@@ -1,0 +1,3 @@
+import {Page,Reveal} from '../components/Motion';
+import {timeline} from '../data';
+export default function Journey(){return <Page title="Hogwarts Express" eyebrow="JOURNEY · CHAPTERS ALONG THE WAY"><h2>Learning. Building. <em>Becoming.</em></h2><ol className="express-timeline">{timeline.map((event,i)=><li key={event.title}><Reveal index={i}><article className="timeline-item"><span className="eyebrow">{event.date}</span><h2>{event.title}</h2><p>{event.description}</p></article></Reveal></li>)}</ol><p className="muted">Project and certification dates: TODO — dates were not supplied.</p></Page>}

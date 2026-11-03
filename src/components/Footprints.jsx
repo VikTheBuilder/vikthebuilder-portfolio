@@ -1,0 +1,1 @@
+export default function Footprints(){return <svg viewBox="0 0 52 24" width="36" height="20" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="8" rx="4" ry="7" transform="rotate(-25 12 8)"/><ellipse cx="17" cy="18" rx="3" ry="3.5"/><ellipse cx="36" cy="6" rx="4" ry="7" transform="rotate(-25 36 6)"/><ellipse cx="41" cy="16" rx="3" ry="3.5"/></g></svg>}

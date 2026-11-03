@@ -4,6 +4,18 @@ React + Vite + Tailwind CSS + Framer Motion. Original CSS/SVG artwork; locally b
 
 Run `npm install`, then `npm run dev`. Production: `npm run build` and `npm run preview`.
 
+## Multi-page app
+
+React Router v6 uses BrowserRouter, lazy route modules, Suspense, and a shared Layout. Routes: `/`, `/about`, `/projects`, `/projects/:slug`, `/skills`, `/trophies`, `/journey`, `/contact`, and a themed catch-all. `vercel.json` rewrites deep links to `index.html`.
+
+All factual portfolio content is in `src/data.js`. Existing CSS and SVG banner artwork are retained. Project filters are reflected in query parameters. The acceptance letter is dismissed persistently using localStorage; light mode and Muggle Mode preferences are also remembered. If browser storage is blocked, settings work for the current page session.
+
+Owl Post validates fields and prepares a mailto draft in the visitor's email app. It does not transmit or store messages on a server. Direct message delivery would require a separately configured service.
+
+Motion includes wait-mode page transitions, shared project layout IDs, short SVG flow animation, route footprints, and scroll reveals. Reduced-motion preferences and Muggle Mode disable these effects. Modal navigation uses native dialog focus trapping and Escape dismissal. Route pages set unique document titles, scroll to the top, and focus their h1 after lazy loading.
+
+Dependency audit: the requested React Router v6 has moderate upstream advisories (open redirect with untrusted Link destinations and SSR hydration). The app uses fixed internal destinations and BrowserRouter without SSR hydration. npm's proposed remediation requires upgrading to v7, which is outside the requested v6 constraint.
+
 ## Content TODO
 
 Add the actual resume at `public/Vikramaditya_Singh_Resume.pdf`, then rebuild. The download button automatically becomes available when the file is present. Vite serves it at `/Vikramaditya_Singh_Resume.pdf`.

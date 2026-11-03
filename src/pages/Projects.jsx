@@ -1,0 +1,5 @@
+import {useSearchParams} from 'react-router-dom';
+import {Page,Reveal} from '../components/Motion';
+import ProjectCard from '../components/ProjectCard';
+import {projects} from '../data';
+export default function Projects(){const [params,setParams]=useSearchParams();const categories=['All',...new Set(projects.map(p=>p.category))];const selected=categories.includes(params.get('category'))?params.get('category'):'All';return <Page title="Spell Book" eyebrow="PROJECTS · THE PROJECT GRIMOIRE"><div className="section-heading"><h2>Ideas, made <em>real.</em></h2><p>A collection of things I’ve built<br/>and helped bring to life.</p></div><h3 className="filter-label">Room of Requirement <span>Find a project by discipline</span></h3><div className="filters" role="group" aria-label="Room of Requirement project filter">{categories.map(x=><button key={x} aria-pressed={selected===x} onClick={()=>setParams(x==='All'?{}:{category:x},{replace:true})}>{x==='All'?'All projects':x}</button>)}</div><div className="project-grid">{projects.filter(p=>selected==='All'||p.category===selected).map((p,i)=><Reveal key={p.slug} index={i}><ProjectCard project={p}/></Reveal>)}</div></Page>}
