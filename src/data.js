@@ -19,7 +19,13 @@ export const projects=[
  incantation:'# TODO: Add a verified grievance-intake API snippet.\n# Documented flow (not executable):\n# IVR intake → transcription → sentiment triage → routing',
  diagram:flow(['Twilio IVR call','Flask API','AI transcription','Sentiment triage','Routing'])}
 ];
-export const skills={Languages:['Python','Java','JavaScript','TypeScript','SQL'],Frameworks:['React','Flask','Node.js','Express','Tailwind CSS'],'Cloud & databases':['AWS S3','EC2','Lambda','Rekognition','IAM','Firebase Auth','Cloud Firestore'],Security:['Network Security Fundamentals','Linux Admin','Splunk','Chronicle','Suricata','Wireshark','Vulnerability Assessment','JWT Auth & Access Control'],Tools:['Git','GitHub','REST APIs','Postman','CI/CD Fundamentals']};
+export const skills=[
+ {id:'languages',category:'Languages',owlGrade:'TODO',topSkill:{name:'Python',owlGrade:'TODO'},items:['Python','Java','JavaScript','TypeScript','SQL']},
+ {id:'frameworks',category:'Frameworks/Libraries',owlGrade:'TODO',topSkill:{name:'React',owlGrade:'TODO'},items:['React','Flask','Node.js','Express','Tailwind CSS']},
+ {id:'cloud',category:'Cloud & Databases',owlGrade:'TODO',topSkill:{name:'AWS (S3, EC2, Lambda, Rekognition, IAM)',owlGrade:'TODO'},items:['AWS (S3, EC2, Lambda, Rekognition, IAM)','Firebase Auth','Cloud Firestore']},
+ {id:'security',category:'Security & Networking',owlGrade:'TODO',topSkill:{name:'Network Security Fundamentals',owlGrade:'TODO'},items:['Network Security Fundamentals','Linux Admin','SIEM (Splunk, Chronicle)','IDS/IPS (Suricata)','Wireshark','Vulnerability Assessment','JWT Auth & Access Control']},
+ {id:'tools',category:'Developer Tools',owlGrade:'TODO',topSkill:{name:'Git',owlGrade:'TODO'},items:['Git','GitHub','REST APIs','Postman','CI/CD Fundamentals']}
+];
 export const links=[['GitHub','https://github.com/VikTheBuilder'],['LinkedIn','https://linkedin.com/in/vikthebuilder'],['LeetCode','https://leetcode.com/u/VikTheBuilder'],['Codeforces','https://codeforces.com/profile/VikTheBuiler']];
 export const profile={name:'Vikramaditya Singh',handle:'VikTheBuilder',email:'vikthebuilder@gmail.com',location:'Prayagraj, Uttar Pradesh, India',resume:'/Vikramaditya_Singh_Resume.pdf',role:'Full-stack developer. Cloud builder.',tagline:'Security-conscious by design.',intro:'Turning ideas into cloud-native applications and AI-powered experiences — with a little Gryffindor spirit.',summary:['I’m Vikramaditya, a Computer Science student at VIT Bhopal. I build full-stack applications with React, Flask, Node.js, and AWS, and explore AI/ML with scikit-learn, TensorFlow, and PyTorch.','As a Google Cybersecurity Professional Certificate holder, I bring practical exposure to Linux, SQL, network security, SIEM, IDS/IPS, and packet analysis. That perspective shapes how I build: JWT authentication, least-privilege access, and per-user isolation.'],seeking:'Seeking an engineering role blending software development, AI/ML, and security/compliance.'};
 export const education={degree:'B.Tech · Computer Science',school:'Vellore Institute of Technology, Bhopal',period:'Aug 2024 — Aug 2028'};
@@ -49,3 +55,13 @@ export const mapRooms=[
   {path:'/journey',room:'Hogwarts Express',description:'Education and hackathon milestones along the journey.',x:49,y:85},
   {path:'/contact',room:'Owl Post',description:'Get in touch, find profile links, and download the resume.',x:81,y:71}
 ];
+
+export const profiles=['GitHub','LeetCode','Codeforces','LinkedIn'].map(label=>({label,url:links.find(([name])=>name===label)[1]}));
+export const trophies={
+ featured:{...award,year:'2025',team},
+ plaques:[{id:'finalist',value:8,display:'8x',label:'Hackathon finalist',detail:'Collegiate and national level',suffix:'x',decimals:0},{id:'leetcode',value:200,display:'200+',label:'LeetCode problems',detail:'Data structures & algorithms',suffix:'+',decimals:0},{id:'cgpa',value:9.08,display:'9.08/10',label:'CGPA',detail:education.school,suffix:'/10',decimals:2}],
+ google:{title:'Google Cybersecurity Professional Certificate',provider:'Coursera',courseCount:9,topics:['Network security','Linux & SQL','Python for security automation','SIEM','IDS/IPS','Packet analysis']},
+ courses:courses.map(([title,provider])=>({title,provider}))
+};
+export const skillPage={title:'Ollivanders',eyebrow:'SKILLS · TOOLS OF THE CRAFT',intro:'Choose a wand. Explore the tools behind the work.',note:'Wand shapes and lengths are decorative, not proficiency ratings.',meta:'Explore Vikramaditya Singh’s languages, frameworks, cloud and database tools, security and networking skills, and developer tools.'};
+export const trophyPage={title:'Trophy Room',eyebrow:'RECOGNITION · THE COMMON ROOM',intro:'Built with courage. Learned through practice.',meta:'Vikramaditya Singh’s Aarohan Hackathon win, hackathon finals, LeetCode practice, academic record, and professional certifications.'};

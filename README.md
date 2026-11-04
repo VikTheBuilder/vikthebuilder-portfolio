@@ -39,3 +39,11 @@ Footer route links remain visible on every page and highlight the active route. 
 `projects` in `src/data.js` holds the real title, creative spell name, effect, stack, tags, GitHub URL, contributor status, resume bullets, incantation TODO, and SVG node/edge definition for each project. No API paths or runnable project code were supplied, so incantations explicitly remain TODO with non-executable flow notes. Numerical achievement/storage counts are omitted under the no-metrics constraint.
 
 Filters use `?tag=ai-ml`, `?tag=cloud`, `?tag=security`, and `?tag=full-stack`; unknown tags show an empty state. Vaultify's native flip button supports click, Enter, and Space. Muggle Mode/reduced motion exposes its bullets directly, disables layout motion, and renders static diagrams. The details include per-project titles and descriptions, copy feedback, ordered diagram alternatives, contributor attribution, PRAHARI team and win, and previous/next links.
+
+## Ollivanders and Trophy Room
+
+Skills use five resume-based categories. Each category and its decorative core skill has an `owlGrade: 'TODO'` field in `src/data.js`; only explicitly supplied O/E/A category grades render publicly. The SVG wands have no proficiency scale. Hover, focus, and tap expose rune badges; Muggle Mode renders the plain category lists.
+
+The Trophy Room uses the user's revised figures: 8x finalist, 200+ LeetCode problems, and CGPA 9.08/10. These explicitly authorized figures supersede the initial no-metrics instruction for this page. Counters run once when visible and expose final values to assistive technology; Muggle Mode/reduced motion displays final values directly. The page includes the supplied Aarohan team, Google certificate topics and nine-course count, five course scrolls, and profile links with noopener/noreferrer.
+
+Validated: production build; hidden unset grades; keyboard and mobile wand expansion; responsive layouts; static Muggle fallback; final plaque values; profile links; page titles/descriptions; browser console.
