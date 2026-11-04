@@ -71,7 +71,7 @@ export const mapRooms=[
 export const profiles=['GitHub','LeetCode','Codeforces','LinkedIn'].map(label=>({label,url:links.find(([name])=>name===label)[1]}));
 export const trophies={
  featured:{...award,year:'2025',team},
- plaques:[{id:'finalist',label:'Hackathon finalist',detail:'Collegiate and national level'},{id:'leetcode',label:'LeetCode problems',detail:'Data structures & algorithms'},{id:'cgpa',label:'CGPA',detail:education.school}],
+ plaques:[{id:'finalist',value:8,display:'8x',label:'Hackathon finalist',detail:'Collegiate and national level',suffix:'x',decimals:0},{id:'leetcode',value:200,display:'200+',label:'DSA problems on LeetCode',detail:'Data structures & algorithms',suffix:'+',decimals:0},{id:'cgpa',value:9.08,display:'9.08/10',label:'CGPA',detail:education.school,suffix:'/10',decimals:2}],
  google:{date:milestoneDates.cybersecurity,title:'Google Cybersecurity Professional Certificate',provider:'Coursera',courseCount:9,topics:['Network security','Linux & SQL','Python for security automation','SIEM','IDS/IPS','Packet analysis']},
  courses:courses.map(([title,provider])=>({title,provider}))
 };

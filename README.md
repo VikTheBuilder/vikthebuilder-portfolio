@@ -1,6 +1,6 @@
 # VikTheBuilder portfolio
 
-React + Vite + Tailwind CSS + Framer Motion; React Router v6 with BrowserRouter. Portfolio facts, dates, links, theme copy, and SEO settings live in `src/data.js`. Original CSS/SVG artwork only; no photos, audio, phone numbers, live demos, or numerical achievement plaques.
+React + Vite + Tailwind CSS + Framer Motion; React Router v6 with BrowserRouter. Portfolio facts, dates, links, theme copy, and SEO settings live in `src/data.js`. Original CSS/SVG artwork only; no photos, audio, phone numbers, live demos, or invented project performance metrics. Resume achievement facts are retained.
 
 ## Setup and scripts
 

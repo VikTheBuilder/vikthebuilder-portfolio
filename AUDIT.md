@@ -73,3 +73,7 @@ Decimal kB; route chunks exclude shared core, shared Motion, and separately load
 5. Decide on a separate React Router v7 migration to resolve the remaining upstream advisories while changing the original v6 requirement.
 
 Additional low-severity focus edge case (`src/components/Layout.jsx`): selecting the current map room does not mount a new page. Clear the pending navigation target for same-route selection so dismissal restores the trigger instead of waiting for a nonexistent page-ready event.
+
+## Resume-stat clarification
+
+The owner clarified that the no-metrics restriction applies only to project performance claims (such as latency, accuracy, or users). Restored the supplied resume facts: 8x hackathon finalist, 200+ DSA problems on LeetCode, and CGPA 9.08/10, with once-on-scroll counters and static reduced-motion/Muggle Mode values. The earlier numeric-plaque removal is superseded; every other audit fix remains. Both 100 Days of Code journey stops were already intact. No project metrics were added.
