@@ -13,9 +13,9 @@ Requires Node.js 22 and npm. Run `npm ci`, then `npm run dev`.
 
 ## Owl Post
 
-Copy `.env.example` to `.env.local` and set `VITE_WEB3FORMS_KEY` to your Web3Forms public access key. The client sends to https://api.web3forms.com/submit only after validation. Vite embeds VITE_ variables in the browser bundle: never put a private service secret in them. Configure domain restrictions and spam protection in Web3Forms. Local validation, a honeypot, and a 30-second client cooldown are convenience protections, not server-side abuse controls.
+Copy `.env.example` to `.env.local` and set `VITE_WEB3FORMS_KEY` to your Web3Forms public access key. The client sends to https://api.web3forms.com/submit only after validation. Vite embeds VITE_ variables in the browser bundle: never put a private service secret in them. Configure domain restrictions and spam protection in Web3Forms. Local validation, a honeypot, a 30-second attempt cooldown, and three attempts per rolling 15-minute window reduce browser spam. Timestamps persist in localStorage and synchronize across tabs; Web Locks serialize concurrent attempts where supported. Storage-disabled browsers fall back to memory. HTTP 429 responses honor Retry-After, defaulting to a one-hour backoff. These browser controls are bypassable and do not provide DDoS protection. Web3Forms enforces its own IP rate limits and server-side spam checks.
 
-Without a key, the form opens a mailto draft and explicitly says it has not sent a message. No delivery claim is made. The network success/error paths require a configured key for an end-to-end delivery test; test email delivery yourself after configuration. Set the key in Vercel's build environment and redeploy when it changes. `.env` and `.env.*` are ignored; only `.env.example` is tracked.
+Without a key, the form opens a mailto draft and explicitly says it has not sent a message. No delivery claim is made. The supplied public access key is configured in ignored `.env.local`; `.env.example` stays blank. The network success/error paths require a configured key for an end-to-end delivery test; test email delivery yourself after configuration. Set the key in Vercel's build environment and redeploy when it changes. `.env` and `.env.*` are ignored; only `.env.example` is tracked.
 
 ## Resume and skills
 
@@ -42,3 +42,11 @@ Header/footer toggles, text navigation, a first-focusable skip link, gold focus 
 See `AUDIT.md` for findings, scope, measurements, route chunk sizes, and outstanding setup. Routes, map, and contact animations are code-split. Fonts are Latin WOFF2 with swap display; primary Cinzel/Inter faces are preloaded. No runtime dependency was added for this audit. Lighthouse and the SVG rasterizer were installed only in ignored `.sites-runtime/audit-tools`.
 
 React Router v6 remains as explicitly requested. `npm audit` reports two moderate package entries arising from upstream open-redirect and SSR-hydration advisories. Current route destinations are fixed local data, and the application does not use SSR hydration/deserialization. The available upstream fix is v7.18.5, a major upgrade; this remains a documented dependency risk, not a clean audit claim. Plan a separate v7 migration if a zero-advisory policy is required.
+
+## Bot verification and hosting protection
+
+hCaptcha loads only on the configured contact page, using Web3Forms’ documented shared public site key. CAPTCHA tokens are included in submissions and cleared after each attempt or expiry. In the Web3Forms dashboard, open this form and enable **hCaptcha** under **Block Spam** to require verification server-side; client checks alone are bypassable. If available on your plan, restrict submissions to your production domain. Domain restriction is a Web3Forms Pro feature.
+
+Site availability protection belongs at your hosting/CDN firewall (Sites, Vercel, or Cloudflare). This static application cannot guarantee protection against DDoS, and the local rate limiter must never be described as an IP/server limiter. No proxy or private backend secret was added.
+
+Run `node --test scripts/form-rate-limit.test.mjs` to verify cooldown, rolling-window capacity, persistence, concurrent reservations, unavailable storage, and provider backoff. No test emails are sent by this test. Complete CAPTCHA yourself and send one real message to check email delivery after deployment.

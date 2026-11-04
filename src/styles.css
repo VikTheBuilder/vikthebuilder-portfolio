@@ -104,3 +104,4 @@ html[data-muggle=true]{scroll-behavior:auto!important}html[data-muggle=true] *,h
 
 /* Reserve route loading space so the footer does not jump into view. */
 .route-loading{min-height:calc(100svh - 70px);padding-top:55px}.parchment-letter h2{font-size:clamp(36px,4vw,44px);line-height:1.35;max-width:9em}.architecture svg{height:auto;aspect-ratio:auto}.hero-art svg{aspect-ratio:200 / 210}
+.owl-captcha{margin-block:18px}.owl-captcha-widget{min-height:144px}.owl-captcha .owl-error{color:#740001;font-size:13px}.owl-captcha .owl-fallback{background:transparent;border:0;padding:8px 0;cursor:pointer}
