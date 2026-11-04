@@ -10,7 +10,7 @@ export function SettingsProvider({children}){
  const muggleMode=override===null?Boolean(reduced):override==='true';
  const setMuggleMode=value=>setOverride(String(typeof value==='function'?value(muggleMode):value));
  const quiet=Boolean(reduced||muggleMode);
- useLayoutEffect(()=>{const root=document.documentElement;root.dataset.theme=theme;root.style.colorScheme=theme==='lumos'?'light':'dark';root.dataset.muggle=String(muggleMode);root.dataset.motion=quiet?'off':'on';saveSetting('theme',theme);if(override!==null)saveSetting('muggleMode',override)},[theme,muggleMode,quiet,override]);
+ useLayoutEffect(()=>{const root=document.documentElement;root.dataset.theme=theme;root.style.colorScheme=theme==='lumos'?'light':'dark';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='lumos'?'#F4E9CD':'#1A0A0A');root.dataset.muggle=String(muggleMode);root.dataset.motion=quiet?'off':'on';saveSetting('theme',theme);if(override!==null)saveSetting('muggleMode',override)},[theme,muggleMode,quiet,override]);
  return <SettingsContext.Provider value={{theme,setTheme,muggleMode,setMuggleMode,quiet,muggle:muggleMode,setMuggle:setMuggleMode,light:theme==='lumos'}}><MotionConfig reducedMotion={quiet?'always':'never'} transition={{duration:quiet?0:.2}}>{children}</MotionConfig></SettingsContext.Provider>;
 }
 export const useSettings=()=>useContext(SettingsContext);

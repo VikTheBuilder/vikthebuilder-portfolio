@@ -101,3 +101,6 @@ html[data-muggle=true]{scroll-behavior:auto!important}html[data-muggle=true] *,h
 
 .floo-fireplace{background:#1A0A0A;border-radius:5px}.theme-toggle[aria-pressed=true] svg{color:#EEBA30}.footer-settings button[aria-pressed=true]{background:#740001;color:#F4E9CD}
 .course-scroll{background-color:#F4E9CD}.course-scroll h3{color:#30130f}.course-scroll p{color:#594033}
+
+/* Reserve route loading space so the footer does not jump into view. */
+.route-loading{min-height:calc(100svh - 70px);padding-top:55px}.parchment-letter h2{font-size:clamp(36px,4vw,44px);line-height:1.35;max-width:9em}.architecture svg{height:auto;aspect-ratio:auto}.hero-art svg{aspect-ratio:200 / 210}

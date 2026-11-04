@@ -20,6 +20,6 @@ export default function ProjectCard({project:p}){
     <div className="flip-face flip-back" id="vaultify-bullets" aria-hidden={!flipped}><ul className="resume-bullets">{p.bullets.map(b=><li key={b}>{b}</li>)}</ul></div>
    </motion.div></div>
   </>)}
-  <div className="project-links"><Link className="repo-link" to={`/projects/${p.slug}`}>Read the spell →</Link><a className="button github-button" href={p.github} target="_blank" rel="noreferrer" aria-label={`${p.realTitle} on GitHub (opens new tab)`}>GitHub ↗</a></div>
+  <div className="project-links"><Link className="repo-link" to={`/projects/${p.slug}`}>Read the spell →</Link><a className="button github-button" href={p.github} target="_blank" rel="noopener noreferrer" aria-label={`${p.realTitle} on GitHub (opens new tab)`}>GitHub ↗</a></div>
  </article>;
 }

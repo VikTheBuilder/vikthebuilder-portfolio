@@ -17,8 +17,8 @@ export default function Layout({children}){
   const plain=small||muggle;
   useEffect(()=>{const query=window.matchMedia('(max-width: 639px)');const update=()=>setSmall(query.matches);query.addEventListener('change',update);return()=>query.removeEventListener('change',update)},[]);
   useEffect(()=>{if(plain&&open){setOpen(false);requestAnimationFrame(()=>fallback.current?.focus())}},[plain,open]);
-  useEffect(()=>{const ready=event=>{readyPath.current=event.detail;if(restorePath.current===event.detail&&!openRef.current){trigger.current?.focus({preventScroll:true});restorePath.current=null}};window.addEventListener('portfolio:page-ready',ready);return()=>window.removeEventListener('portfolio:page-ready',ready)},[]);
-  function dismiss(){openRef.current=false;setOpen(false);requestAnimationFrame(()=>trigger.current?.focus({preventScroll:true}));if(readyPath.current===restorePath.current)restorePath.current=null}
+  useEffect(()=>{const ready=event=>{readyPath.current=event.detail;if(restorePath.current===event.detail&&!openRef.current){document.querySelector('main h1')?.focus({preventScroll:true});restorePath.current=null}};window.addEventListener('portfolio:page-ready',ready);return()=>window.removeEventListener('portfolio:page-ready',ready)},[]);
+  function dismiss(){openRef.current=false;setOpen(false);const navigating=restorePath.current;requestAnimationFrame(()=>{if(navigating){if(readyPath.current===navigating){document.querySelector('main h1')?.focus({preventScroll:true});restorePath.current=null}}else trigger.current?.focus({preventScroll:true})})}
   return <>
     <a className="skip" href="#main">Skip to content</a>
     <header className="map-header">
@@ -34,6 +34,6 @@ export default function Layout({children}){
       <div className="footer-meta"><span>{profile.name} <span className="muted">/ {profile.handle}</span></span><div className="socials">{links.map(([label,url])=><a key={label} href={url} target="_blank" rel="noopener noreferrer" aria-label={`${label} (opens new tab)`}>{label} ↗</a>)}</div><div className="footer-settings"><SettingsToggles/></div><p>{sitePolish.spellHint}</p><p>© {new Date().getFullYear()} {profile.name}</p><p>{sitePolish.disclaimer}</p></div>
     </footer>
     <Suspense fallback={null}><GlobalMagic/></Suspense>
-    {open&&!plain&&<Suspense fallback={<div className="map-loading" role="status">{mapCopy.loading}<button onClick={dismiss}>{mapCopy.close}</button></div>}><MaraudersMap pathname={pathname} onDismiss={dismiss} onNavigate={path=>{restorePath.current=path}}/></Suspense>}
+    {open&&!plain&&<Suspense fallback={<div className="map-loading" role="status">{mapCopy.loading}<button onClick={dismiss}>{mapCopy.close}</button></div>}><MaraudersMap pathname={pathname} onDismiss={dismiss} onNavigate={path=>{restorePath.current=path===pathname?null:path}}/></Suspense>}
   </>;
 }

@@ -1,49 +1,44 @@
 # VikTheBuilder portfolio
 
-React + Vite + Tailwind CSS + Framer Motion. Original CSS/SVG artwork; locally bundled Cinzel and Inter fonts.
+React + Vite + Tailwind CSS + Framer Motion; React Router v6 with BrowserRouter. Portfolio facts, dates, links, theme copy, and SEO settings live in `src/data.js`. Original CSS/SVG artwork only; no photos, audio, phone numbers, live demos, or numerical achievement plaques.
 
-Run `npm install`, then `npm run dev`. Production: `npm run build` and `npm run preview`.
+## Setup and scripts
 
-## Multi-page app
+Requires Node.js 22 and npm. Run `npm ci`, then `npm run dev`.
 
-React Router v6 uses BrowserRouter, lazy route modules, Suspense, and a shared Layout. Routes: `/`, `/about`, `/projects`, `/projects/:slug`, `/skills`, `/trophies`, `/journey`, `/contact`, and a themed catch-all. `vercel.json` rewrites deep links to `index.html`.
+- `npm run dev`: local development at 127.0.0.1.
+- `npm run build`: production output in `dist/`, including route-specific HTML metadata, favicon, OG image, robots.txt, and sitemap.xml.
+- `npm run preview`: serve the production build locally, normally at http://127.0.0.1:4173.
+- `npm run check`: validate built route metadata, content invariants, public assets, headers, env hygiene, and report raw/gzip JS chunk sizes. Run after building.
 
-All factual portfolio content is in `src/data.js`. Existing CSS and SVG banner artwork are retained. Project filters are reflected in query parameters. The full-screen acceptance letter is dismissed for the current session using sessionStorage. Light mode and Muggle Mode preferences use localStorage. Reduced motion and Muggle Mode bypass the intro. The seal, Skip intro link, and Escape dismiss the letter; focus is trapped during the intro and returns to the landing heading afterward. If browser storage is blocked, settings work for the current page session.
+## Owl Post
 
-Owl Post validates fields and prepares a mailto draft in the visitor's email app. It does not transmit or store messages on a server. Direct message delivery would require a separately configured service.
+Copy `.env.example` to `.env.local` and set `VITE_WEB3FORMS_KEY` to your Web3Forms public access key. The client sends to https://api.web3forms.com/submit only after validation. Vite embeds VITE_ variables in the browser bundle: never put a private service secret in them. Configure domain restrictions and spam protection in Web3Forms. Local validation, a honeypot, and a 30-second client cooldown are convenience protections, not server-side abuse controls.
 
-The home heading is plain text and does not animate. Decorative candlelight and 18 CSS embers pause while the tab is hidden. Home copy and CTA labels are sourced from data.js. Motion includes wait-mode page transitions on other routes, shared project layout IDs, short SVG flow animation, route footprints, and scroll reveals. Reduced-motion preferences and Muggle Mode disable these effects. Modal navigation uses native dialog focus trapping and Escape dismissal. Route pages set unique document titles, scroll to the top, and focus their h1 after lazy loading.
+Without a key, the form opens a mailto draft and explicitly says it has not sent a message. No delivery claim is made. The network success/error paths require a configured key for an end-to-end delivery test; test email delivery yourself after configuration. Set the key in Vercel's build environment and redeploy when it changes. `.env` and `.env.*` are ignored; only `.env.example` is tracked.
 
-Dependency audit: the requested React Router v6 has moderate upstream advisories (open redirect with untrusted Link destinations and SSR hydration). The app uses fixed internal destinations and BrowserRouter without SSR hydration. npm's proposed remediation requires upgrading to v7, which is outside the requested v6 constraint.
+## Resume and skills
 
-## Content TODO
+Add the real, phone-free resume at `public/Vikramaditya_Singh_Resume.pdf`, review its visible text and PDF metadata for private information, and rebuild. Until then the download is disabled with an unavailable note. No PDF was supplied during the audit, so PDF contents could not be verified.
 
-Add the actual resume at `public/Vikramaditya_Singh_Resume.pdf`, then rebuild. The download button automatically becomes available when the file is present. Vite serves it at `/Vikramaditya_Singh_Resume.pdf`.
+Optionally fill category/top-skill `owlGrade` fields in `src/data.js`. Only O, E, or A are accepted for public category badges. Unset grades remain hidden; no proficiency is guessed. Project incantations are clearly labeled documented flow notes, not fabricated executable code.
 
-Numerical achievements and CGPA are omitted to follow the no-metrics requirement. No professional experience or credential URLs were supplied, so none are invented. Source links preserve the provided Codeforces spelling.
+## Routes and hosting
 
-## Accessibility and performance
+Routes: `/`, `/about`, `/projects`, `/projects/vaultify`, `/projects/unspoken`, `/projects/equilibria`, `/projects/prahari`, `/skills`, `/trophies`, `/journey`, `/contact`; unknown paths show the themed 404. Filters use `?tag=`. The sitemap lists the 11 real pages, not the 404 or filter variants.
 
-Semantic landmarks, skip link, native keyboard controls, visible focus states, named SVG diagrams, reduced-motion support, mobile menu with expanded state, and local fonts. Run Lighthouse against a production preview to verify the requested 90+ target; do not treat implementation choices as a measured score.
+For Vercel, build with `npm run build`, publish `dist`, and retain `vercel.json`. It includes the SPA fallback plus nosniff, strict-origin-when-cross-origin, and DENY frame headers. Verify the headers against the actual Vercel deployment; localhost Vite and Sites do not automatically apply Vercel configuration. Sites deployment uses `.openai/hosting.json` and the existing private audience.
 
-## Marauder’s Map navigation
+The build writes unique title, description, canonical, Open Graph, and Twitter metadata into each route's HTML; client navigation updates the same tags. Canonicals and sitemap URLs use `siteSeo.origin` in `data.js`. Change that one value if moving to a different production domain, then rebuild. `public/og-image.svg` is the original artwork; `public/og-image.png` is its rasterized sharing version. The icon is an original geometric V seal. No raster image is rendered in page content.
 
-The fixed header shows the name, map trigger (desktop), and an intentionally disabled Lumos/Nox placeholder. The previous light-mode preference remains supported by the design system for later wiring. Muggle Mode is available in the footer.
+## Accessibility and settings
 
-The map loads only when opened. Room names, descriptions, coordinates, and map copy are in `src/data.js`. Native dialog semantics, explicit Tab wrapping, Escape handling, scroll locking, and trigger focus restoration support keyboard use. Real route links preserve modified-click/new-tab behavior. The current room includes project detail routes. Opening reveals the oath and unfolds original SVG parchment; route selection traces a dotted path before navigating; closing folds the map and briefly displays “Mischief managed.” Reduced motion opens and closes instantly without ink or footprint animation.
+Lumos/Nox and Muggle Mode persist with storage-error handling. An inline bootstrap sets theme/motion attributes before React. System reduced-motion defaults to plain mode unless the user has selected otherwise; motion remains disabled under the OS preference even if plain mode is turned off. The map, train, diagrams, owl, flame, particles, and Patronus respect the shared quiet setting.
 
-Footer route links remain visible on every page and highlight the active route. Below 640px and in Muggle Mode, the header links to that list instead of loading the map.
+Header/footer toggles, text navigation, a first-focusable skip link, gold focus rings, route-heading focus, native form controls, associated error messages, and live status messages are retained. Map dismissal restores trigger focus; map navigation focuses the destination heading. The wand cursor is restricted to fine-pointer hover devices and preserves native text-entry/focus cursors. Its bounded canvas pauses when hidden.
 
-## Spell Book projects
+## Audit and performance
 
-`projects` in `src/data.js` holds the real title, creative spell name, effect, stack, tags, GitHub URL, contributor status, resume bullets, incantation TODO, and SVG node/edge definition for each project. No API paths or runnable project code were supplied, so incantations explicitly remain TODO with non-executable flow notes. Numerical achievement/storage counts are omitted under the no-metrics constraint.
+See `AUDIT.md` for findings, scope, measurements, route chunk sizes, and outstanding setup. Routes, map, and contact animations are code-split. Fonts are Latin WOFF2 with swap display; primary Cinzel/Inter faces are preloaded. No runtime dependency was added for this audit. Lighthouse and the SVG rasterizer were installed only in ignored `.sites-runtime/audit-tools`.
 
-Filters use `?tag=ai-ml`, `?tag=cloud`, `?tag=security`, and `?tag=full-stack`; unknown tags show an empty state. Vaultify's native flip button supports click, Enter, and Space. Muggle Mode/reduced motion exposes its bullets directly, disables layout motion, and renders static diagrams. The details include per-project titles and descriptions, copy feedback, ordered diagram alternatives, contributor attribution, PRAHARI team and win, and previous/next links.
-
-## Ollivanders and Trophy Room
-
-Skills use five resume-based categories. Each category and its decorative core skill has an `owlGrade: 'TODO'` field in `src/data.js`; only explicitly supplied O/E/A category grades render publicly. The SVG wands have no proficiency scale. Hover, focus, and tap expose rune badges; Muggle Mode renders the plain category lists.
-
-The Trophy Room uses the user's revised figures: 8x finalist, 200+ LeetCode problems, and CGPA 9.08/10. These explicitly authorized figures supersede the initial no-metrics instruction for this page. Counters run once when visible and expose final values to assistive technology; Muggle Mode/reduced motion displays final values directly. The page includes the supplied Aarohan team, Google certificate topics and nine-course count, five course scrolls, and profile links with noopener/noreferrer.
-
-Validated: production build; hidden unset grades; keyboard and mobile wand expansion; responsive layouts; static Muggle fallback; final plaque values; profile links; page titles/descriptions; browser console.
+React Router v6 remains as explicitly requested. `npm audit` reports two moderate package entries arising from upstream open-redirect and SSR-hydration advisories. Current route destinations are fixed local data, and the application does not use SSR hydration/deserialization. The available upstream fix is v7.18.5, a major upgrade; this remains a documented dependency risk, not a clean audit claim. Plan a separate v7 migration if a zero-advisory policy is required.
