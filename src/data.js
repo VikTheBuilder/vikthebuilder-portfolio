@@ -35,7 +35,18 @@ export const team=['Aniket Pandey','Rishi Raj','Aditya Tiwari',profile.name];
 export const award={name:'Aarohan Hackathon',event:'Techfest, IIT Bombay',date:'December 2025',result:'Winner',project:'PRAHARI',slug:'prahari'};
 export const achievements=[{title:'Hackathon finalist',description:'Collegiate and national-level competitions.'},{title:'DSA practice',description:'Solving data structures and algorithms problems on LeetCode.'}];
 export const navigation=[{path:'/',label:'Home',room:'Acceptance Letter'},{path:'/about',label:'About',room:'Great Hall'},{path:'/projects',label:'Projects',room:'Spell Book'},{path:'/skills',label:'Skills',room:'Ollivanders'},{path:'/trophies',label:'Trophies',room:'Trophy Room'},{path:'/journey',label:'Journey',room:'Hogwarts Express'},{path:'/contact',label:'Contact',room:'Owl Post'}];
-export const timeline=[{date:'August 2024',title:'The journey begins',description:`Began ${education.degree} at ${education.school}.`},{date:award.date,title:`${award.result} · ${award.name}`,description:`${award.event}, with ${award.project}.`},{date:'August 2028 · expected',title:'B.Tech completion',description:education.school},{date:'Next destination',title:'An engineering role',description:profile.seeking}];
+export const journeyCopy={title:'Hogwarts Express',eyebrow:'JOURNEY · PLATFORM 9 ¾',intro:'A journey through learning, building, and the milestones along the way.',visit:'Visit this stop',expected:'Expected',destination:'Destination platform',meta:'Follow Vikramaditya Singh’s journey through computer science at VIT Bhopal, hackathons, courses, and certifications.'};
+export const journey=[
+  {id:'college',title:'Joined college',displayDate:'2024',sortKey:'2024-08',type:'education',description:'Started B.Tech Computer Science at VIT Bhopal.',link:'/about'},
+  {id:'first-final',title:'First hackathon final',displayDate:'Summer 2025',sortKey:'2025-06',type:'hackathon',description:'Reached my first hackathon final.'},
+  {id:'web-bootcamp',title:'Full Stack Web Development Bootcamp',displayDate:'Summer 2025',sortKey:'2025-07',type:'course',description:'Completed the Udemy bootcamp during summer vacation.',link:'/trophies'},
+  {id:'code-begins',title:'100 Days of Code begins',displayDate:'September 2025',sortKey:'2025-09',type:'achievement',description:'Started the LeetCode 100 Days of Code challenge.'},
+  {id:'machine-learning',title:'Machine Learning A-Z',displayDate:'Early December 2025',sortKey:'2025-12-01',type:'course',description:'Completed the Udemy course.',link:'/trophies'},
+  {id:'aarohan',title:'Aarohan Hackathon winner',displayDate:'December 2025',sortKey:'2025-12-25',type:'hackathon',description:'Won the Aarohan Hackathon at Techfest, IIT Bombay with PRAHARI, with teammates Aniket Pandey, Rishi Raj, and Aditya Tiwari.',link:'/projects/prahari',featured:true},
+  {id:'code-complete',title:'100 Days of Code complete',displayDate:'January 2026',sortKey:'2026-01',type:'achievement',description:'Finished the LeetCode 100 Days of Code challenge.',link:'/trophies'},
+  {id:'cybersecurity',title:'Google Cybersecurity Professional Certificate',displayDate:'Summer 2026',sortKey:'2026-07',type:'certification',description:'Completed the 9-course Coursera program during summer vacation.',link:'/trophies'},
+  {id:'graduation',title:'Expected graduation',displayDate:'2028',sortKey:'2028-08',type:'education',description:'B.Tech expected completion (Aug 2028).',expected:true}
+];
 export const home={
   eyebrow:'CODE WITH COURAGE. BUILD WITH PURPOSE.',
   role:'Full-stack CS student · Cloud-native applications · AI/ML',
