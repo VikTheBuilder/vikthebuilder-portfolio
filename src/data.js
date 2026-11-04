@@ -1,6 +1,7 @@
+export const milestoneDates={aarohan:'December 2025',cybersecurity:'Summer 2026'};
 function flow(labels){const nodes=labels.map((label,i)=>({id:`n${i}`,label,x:240,y:55+i*95}));return {width:480,height:labels.length*95+15,nodes,edges:nodes.slice(1).map((n,i)=>({from:nodes[i].id,to:n.id})),steps:labels};}
 export const projectTags=[{id:'all',label:'All'},{id:'ai-ml',label:'AI/ML'},{id:'cloud',label:'Cloud'},{id:'security',label:'Security'},{id:'full-stack',label:'Full-Stack'}];
-export const spellCopy={winner:'Aarohan Winner, Techfest IIT Bombay, Dec 2025',empty:'No spells match this tag. Try another discipline.',incantationNote:'TODO: Verified source code or API example was not supplied. The notes below describe the documented flow; they are not executable code.'};
+export const spellCopy={winner:`Aarohan Winner, Techfest IIT Bombay, ${milestoneDates.aarohan}`,empty:'No spells match this tag. Try another discipline.',incantationNote:'TODO: Verified source code or API example was not supplied. The notes below describe the documented flow; they are not executable code.'};
 export const projects=[
  {slug:'vaultify',realTitle:'Vaultify',spellName:'Alohomora Cloud',type:'Cloud Infrastructure Platform',effect:'A React dashboard and REST API that unify AWS resources with JWT authentication and per-user resource isolation.',wandMovement:['Node.js','Express','React','AWS S3','EC2','Lambda','Rekognition','JWT'],tags:['cloud','security','full-stack'],github:'https://github.com/VikTheBuilder/VAULTIFY',isContributor:false,flagship:true,
  bullets:['Full-stack platform integrating AWS S3, EC2, Lambda, and Rekognition behind one REST API and React dashboard; JWT auth and per-user resource isolation prevent cross-account data access.','Event-driven AI tagging pipeline (S3 trigger → Lambda → Rekognition) auto-labels uploaded images.','Billing engine with configurable margin-based pricing, time-limited pre-signed URL sharing for least-privilege access, and version history across S3 storage tiers.'],
@@ -32,7 +33,7 @@ export const education={degree:'B.Tech · Computer Science',school:'Vellore Inst
 export const certification={title:'Cybersecurity Professional Certificate',provider:'Google · Coursera',description:'Network security, Linux & SQL, Python for security automation, SIEM, IDS/IPS, and packet analysis.'};
 export const courses=[['Programming in Java','NPTEL'],['Full Stack Web Development Bootcamp','Udemy'],['Machine Learning A-Z','Udemy'],['Cloud Computing','NPTEL'],['Marketing Analytics','NPTEL']];
 export const team=['Aniket Pandey','Rishi Raj','Aditya Tiwari',profile.name];
-export const award={name:'Aarohan Hackathon',event:'Techfest, IIT Bombay',date:'December 2025',result:'Winner',project:'PRAHARI',slug:'prahari'};
+export const award={name:'Aarohan Hackathon',event:'Techfest, IIT Bombay',date:milestoneDates.aarohan,result:'Winner',project:'PRAHARI',slug:'prahari'};
 export const achievements=[{title:'Hackathon finalist',description:'Collegiate and national-level competitions.'},{title:'DSA practice',description:'Solving data structures and algorithms problems on LeetCode.'}];
 export const navigation=[{path:'/',label:'Home',room:'Acceptance Letter'},{path:'/about',label:'About',room:'Great Hall'},{path:'/projects',label:'Projects',room:'Spell Book'},{path:'/skills',label:'Skills',room:'Ollivanders'},{path:'/trophies',label:'Trophies',room:'Trophy Room'},{path:'/journey',label:'Journey',room:'Hogwarts Express'},{path:'/contact',label:'Contact',room:'Owl Post'}];
 export const journeyCopy={title:'Hogwarts Express',eyebrow:'JOURNEY · PLATFORM 9 ¾',intro:'A journey through learning, building, and the milestones along the way.',visit:'Visit this stop',expected:'Expected',destination:'Destination platform',meta:'Follow Vikramaditya Singh’s journey through computer science at VIT Bhopal, hackathons, courses, and certifications.'};
@@ -42,9 +43,9 @@ export const journey=[
   {id:'web-bootcamp',title:'Full Stack Web Development Bootcamp',displayDate:'Summer 2025',sortKey:'2025-07',type:'course',description:'Completed the Udemy bootcamp during summer vacation.',link:'/trophies'},
   {id:'code-begins',title:'100 Days of Code begins',displayDate:'September 2025',sortKey:'2025-09',type:'achievement',description:'Started the LeetCode 100 Days of Code challenge.'},
   {id:'machine-learning',title:'Machine Learning A-Z',displayDate:'Early December 2025',sortKey:'2025-12-01',type:'course',description:'Completed the Udemy course.',link:'/trophies'},
-  {id:'aarohan',title:'Aarohan Hackathon winner',displayDate:'December 2025',sortKey:'2025-12-25',type:'hackathon',description:'Won the Aarohan Hackathon at Techfest, IIT Bombay with PRAHARI, with teammates Aniket Pandey, Rishi Raj, and Aditya Tiwari.',link:'/projects/prahari',featured:true},
+  {id:'aarohan',title:'Aarohan Hackathon winner',displayDate:milestoneDates.aarohan,sortKey:'2025-12-25',type:'hackathon',description:'Won the Aarohan Hackathon at Techfest, IIT Bombay with PRAHARI, with teammates Aniket Pandey, Rishi Raj, and Aditya Tiwari.',link:'/projects/prahari',featured:true},
   {id:'code-complete',title:'100 Days of Code complete',displayDate:'January 2026',sortKey:'2026-01',type:'achievement',description:'Finished the LeetCode 100 Days of Code challenge.',link:'/trophies'},
-  {id:'cybersecurity',title:'Google Cybersecurity Professional Certificate',displayDate:'Summer 2026',sortKey:'2026-07',type:'certification',description:'Completed the 9-course Coursera program during summer vacation.',link:'/trophies'},
+  {id:'cybersecurity',title:'Google Cybersecurity Professional Certificate',displayDate:milestoneDates.cybersecurity,sortKey:'2026-07',type:'certification',description:'Completed the 9-course Coursera program during summer vacation.',link:'/trophies'},
   {id:'graduation',title:'Expected graduation',displayDate:'2028',sortKey:'2028-08',type:'education',description:'B.Tech expected completion (Aug 2028).',expected:true}
 ];
 export const home={
@@ -53,7 +54,7 @@ export const home={
   intro:{eyebrow:'THE DEVELOPER’S CHRONICLE',title:'To The Hiring Team',lines:profile.summary[0].split(/(?<=[.!?])\s+/),seal:'Open the acceptance letter',sealMark:'V',skip:'Skip intro',signature:profile.name},
   ctas:[{label:'Open the Spell Book',path:'/projects',rune:'◇'},{label:'Meet the Wizard',path:'/about',rune:'✦'},{label:'Send an Owl',path:'/contact',rune:'↗'}],
   runes:['React','Flask','Node.js','AWS','Python'],runeLabel:'Core technologies',
-  winner:`${award.name} ${award.result}, ${award.event.replace(',','')}, ${award.date.replace('December','Dec')}`,
+  winner:`${award.name} ${award.result}, ${award.event.replace(',','')}, ${award.date}`,
   art:{top:'THE BUILDER',words:['COURAGE','& CURIOSITY'],bottom:'REACT · CLOUD · AI',note:'Built with intent. Bound by curiosity.'}
 };
 export const mapCopy={title:'Marauder’s Map',oath:'I solemnly swear that I am up to no good',oathLines:['I solemnly swear that','I am up to no good'],managed:'Mischief managed',close:'Close map',here:'You are here',hint:'Choose a room to continue your journey.',footerLabel:'Explore the portfolio',loading:'Unfolding the map…'};
@@ -71,7 +72,7 @@ export const profiles=['GitHub','LeetCode','Codeforces','LinkedIn'].map(label=>(
 export const trophies={
  featured:{...award,year:'2025',team},
  plaques:[{id:'finalist',value:8,display:'8x',label:'Hackathon finalist',detail:'Collegiate and national level',suffix:'x',decimals:0},{id:'leetcode',value:200,display:'200+',label:'LeetCode problems',detail:'Data structures & algorithms',suffix:'+',decimals:0},{id:'cgpa',value:9.08,display:'9.08/10',label:'CGPA',detail:education.school,suffix:'/10',decimals:2}],
- google:{title:'Google Cybersecurity Professional Certificate',provider:'Coursera',courseCount:9,topics:['Network security','Linux & SQL','Python for security automation','SIEM','IDS/IPS','Packet analysis']},
+ google:{date:milestoneDates.cybersecurity,title:'Google Cybersecurity Professional Certificate',provider:'Coursera',courseCount:9,topics:['Network security','Linux & SQL','Python for security automation','SIEM','IDS/IPS','Packet analysis']},
  courses:courses.map(([title,provider])=>({title,provider}))
 };
 export const skillPage={title:'Ollivanders',eyebrow:'SKILLS · TOOLS OF THE CRAFT',intro:'Choose a wand. Explore the tools behind the work.',note:'Wand shapes and lengths are decorative, not proficiency ratings.',meta:'Explore Vikramaditya Singh’s languages, frameworks, cloud and database tools, security and networking skills, and developer tools.'};
