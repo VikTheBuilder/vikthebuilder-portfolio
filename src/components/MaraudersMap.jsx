@@ -79,7 +79,7 @@ export default function MaraudersMap({pathname,onDismiss,onNavigate}){
     await finish();
   }
   return <dialog className="marauder-overlay" ref={dialog} aria-modal="true" aria-labelledby="marauder-title" onKeyDown={trap} onCancel={e=>{e.preventDefault();close()}}>
-    <button className="map-dismiss" ref={closeButton} onClick={close} autoFocus>{mapCopy.close} ×</button>
+    <button className="btn btn-outline map-dismiss" ref={closeButton} onClick={close} autoFocus>{mapCopy.close} ×</button>
     <h2 id="marauder-title" className="sr-only">{mapCopy.title}</h2>
     <div className="atlas-stage">
       <svg className="map-oath" viewBox="0 0 800 90" role="img" aria-label={mapCopy.oath}>

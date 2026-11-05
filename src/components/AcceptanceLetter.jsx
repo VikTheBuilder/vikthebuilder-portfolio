@@ -49,16 +49,16 @@ export default function AcceptanceLetter({onDismiss}){
 
   return <dialog ref={dialog} className="acceptance-overlay" aria-labelledby="acceptance-title" aria-describedby="acceptance-summary" onKeyDown={trapFocus} onCancel={event=>{event.preventDefault();dismiss();}}>
     <motion.div className="letter-stage" animate={overlay}>
-      <a className="intro-skip" href="#main" onClick={event=>{event.preventDefault();dismiss();}}>{home.intro.skip}</a>
+      <a className="btn btn-ghost intro-skip" href="#main" onClick={event=>{event.preventDefault();dismiss();}}>{home.intro.skip}</a>
       <motion.article className="parchment-letter" animate={paper}>
         <p className="eyebrow">{home.intro.eyebrow}</p>
         <h2 id="acceptance-title">{home.intro.title}</h2>
         <div id="acceptance-summary">{home.intro.lines.map(line=><p key={line}>{line}</p>)}</div>
         <p className="letter-signature">{home.intro.signature}</p>
-        <motion.button ref={sealButton} className={`intro-wax-seal ${cracked?'is-cracked':''}`} aria-label={home.intro.seal} aria-disabled={cracked} onClick={open} animate={seal} autoFocus>
-          <span className="seal-half seal-left" aria-hidden="true"/>
+        <motion.button ref={sealButton} className={`btn btn-outline intro-wax-seal ${cracked?'is-cracked':''}`} aria-label={home.intro.seal} aria-disabled={cracked} onClick={open} animate={seal} autoFocus>
+          <span className="intro-seal-icon" aria-hidden="true"><span className="seal-half seal-left" aria-hidden="true"/>
           <span className="seal-half seal-right" aria-hidden="true"/>
-          <span className="seal-letter" aria-hidden="true">{home.intro.sealMark}</span>
+          <span className="seal-letter" aria-hidden="true">{home.intro.sealMark}</span></span><span>{home.intro.seal}</span>
         </motion.button>
       </motion.article>
     </motion.div>

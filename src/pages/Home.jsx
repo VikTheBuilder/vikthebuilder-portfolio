@@ -22,7 +22,7 @@ export default function Home(){
         <div className="landing-copy">
           <p className="hero-role landing-role">{home.role}</p>
           <p className="hero-copy">{profile.intro}</p>
-          <div className="wax-ctas">{home.ctas.map(cta=><Link className="wax-cta" to={cta.path} key={cta.path}><span className="cta-seal" aria-hidden="true">{cta.rune}</span><span>{cta.label}</span></Link>)}</div>
+          <div className="btn-row wax-ctas">{home.ctas.map(cta=><Link className="btn btn-outline wax-cta" to={cta.path} key={cta.path}><span className="cta-seal" aria-hidden="true">{cta.rune}</span><span>{cta.label}</span></Link>)}</div>
           <ul className="badges rune-strip" aria-label={home.runeLabel}>{home.runes.map(rune=><li key={rune}><span aria-hidden="true">◇ </span>{rune}</li>)}</ul>
           <Link className="winner-badge" to="/trophies"><span aria-hidden="true">✦</span>{home.winner}<span aria-hidden="true">↗</span></Link>
           <p className="location">⌖ {profile.location}</p>

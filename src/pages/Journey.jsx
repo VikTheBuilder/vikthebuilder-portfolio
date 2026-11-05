@@ -26,7 +26,7 @@ function Station({stop,index,position,quiet}){
       <div className="journey-station-top"><span className="journey-type"><TypeIcon type={stop.type}/></span><span className="journey-date">{stop.displayDate}</span></div>
       {stop.expected&&<p className="journey-platform-label">{copy.destination} · <strong>{copy.expected}</strong></p>}
       <h2 id={`stop-${stop.id}`}>{stop.title}</h2><p>{stop.description}</p>
-      {stop.link&&<Link className="journey-visit" to={stop.link} aria-label={`${copy.visit}: ${stop.title}`}>{copy.visit}<span aria-hidden="true"> ↗</span></Link>}
+      {stop.link&&<Link className="btn btn-outline journey-visit" to={stop.link} aria-label={`${copy.visit}: ${stop.title}`}>{copy.visit}<span aria-hidden="true"> ↗</span></Link>}
     </article></Reveal>
   </li>;
 }

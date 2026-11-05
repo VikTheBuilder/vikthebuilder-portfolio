@@ -14,12 +14,12 @@ export default function ProjectCard({project:p}){
   <ul className="badges" aria-label={`${p.realTitle} technology stack`}>{p.wandMovement.map(t=><li key={t}><span aria-hidden="true">◇ </span>{t}</li>)}</ul>
   {p.slug==='prahari'&&<Link className="spell-award" to="/trophies">✦ {spellCopy.winner}</Link>}
   {p.flagship&&(quiet?<ul className="resume-bullets">{p.bullets.map(b=><li key={b}>{b}</li>)}</ul>:<>
-   <button className="flip-button" aria-expanded={flipped} aria-controls="vaultify-bullets" onClick={()=>setFlipped(!flipped)}>{flipped?'Flip back':'Flip · reveal the build'} <span aria-hidden="true">↻</span></button>
+   <button className="btn btn-outline flip-button" aria-expanded={flipped} aria-controls="vaultify-bullets" onClick={()=>setFlipped(!flipped)}>{flipped?'Flip back':'Flip · reveal the build'} <span aria-hidden="true">↻</span></button>
    <div className="flip-scene"><motion.div className="flip-inner" animate={{rotateY:flipped?180:0}} transition={{duration:.45}}>
     <div className="flip-face flip-front" aria-hidden={flipped}><span aria-hidden="true" className="spell-sigil">◇</span><p>Cloud infrastructure, unified.</p><span>Reveal the engineering behind Vaultify.</span></div>
     <div className="flip-face flip-back" id="vaultify-bullets" aria-hidden={!flipped}><ul className="resume-bullets">{p.bullets.map(b=><li key={b}>{b}</li>)}</ul></div>
    </motion.div></div>
   </>)}
-  <div className="project-links"><Link className="repo-link" to={`/projects/${p.slug}`}>Read the spell →</Link><a className="button github-button" href={p.github} target="_blank" rel="noopener noreferrer" aria-label={`${p.realTitle} on GitHub (opens new tab)`}>GitHub ↗</a></div>
+  <div className="btn-row project-links"><Link className="btn btn-outline repo-link" to={`/projects/${p.slug}`}>Read the spell →</Link><a className="btn btn-outline github-button" href={p.github} target="_blank" rel="noopener noreferrer" aria-label={`${p.realTitle} on GitHub (opens new tab)`}>GitHub ↗</a></div>
  </article>;
 }
