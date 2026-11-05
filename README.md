@@ -1,52 +1,154 @@
-# VikTheBuilder portfolio
+# Vikramaditya Singh | Developer Portfolio.
 
-React + Vite + Tailwind CSS + Framer Motion; React Router v6 with BrowserRouter. Portfolio facts, dates, links, theme copy, and SEO settings live in `src/data.js`. Original CSS/SVG artwork only; no photos, audio, phone numbers, live demos, or invented project performance metrics. Resume achievement facts are retained.
+A Gryffindor-inspired portfolio presenting projects, skills, achievements, education, and contact information.
 
-## Setup and scripts
 
-Requires Node.js 22 and npm. Run `npm ci`, then `npm run dev`.
 
-- `npm run dev`: local development at 127.0.0.1.
-- `npm run build`: production output in `dist/`, including route-specific HTML metadata, favicon, OG image, robots.txt, and sitemap.xml.
-- `npm run preview`: serve the production build locally, normally at http://127.0.0.1:4173.
-- `npm run check`: validate built route metadata, content invariants, public assets, headers, env hygiene, and report raw/gzip JS chunk sizes. Run after building.
+## Features
 
-## Owl Post
+- Routes: `/`, `/about`, `/projects`, `/projects/:slug`, `/skills`, `/trophies`, `/journey`, and `/contact`, plus a themed 404.
+- Marauder's Map navigation with a plain-text fallback.
+- Spell Book project filters, detail pages, and SVG architecture diagrams.
+- Ollivanders skills, Trophy Room certifications, and the Hogwarts Express timeline.
+- Owl Post contact form with validation, bot verification, and an email fallback.
+- Lumos/Nox themes and Muggle Mode (plain, fast view), with keyboard and reduced-motion support.
 
-Copy `.env.example` to `.env.local` and set `VITE_WEB3FORMS_KEY` to your Web3Forms public access key. The client sends to https://api.web3forms.com/submit only after validation. Vite embeds VITE_ variables in the browser bundle: never put a private service secret in them. Configure domain restrictions and spam protection in Web3Forms. Local validation, a honeypot, a 30-second attempt cooldown, and three attempts per rolling 15-minute window reduce browser spam. Timestamps persist in localStorage and synchronize across tabs; Web Locks serialize concurrent attempts where supported. Storage-disabled browsers fall back to memory. HTTP 429 responses honor Retry-After, defaulting to a one-hour backoff. These browser controls are bypassable and do not provide DDoS protection. Web3Forms enforces its own IP rate limits and server-side spam checks.
+## Tech stack
 
-Without a key, the form opens a mailto draft and explicitly says it has not sent a message. No delivery claim is made. The supplied public access key is configured in ignored `.env.local`; `.env.example` stays blank. The network success/error paths require a configured key for an end-to-end delivery test; test email delivery yourself after configuration. Set the key in Vercel's build environment and redeploy when it changes. `.env` and `.env.*` are ignored; only `.env.example` is tracked.
+Dependencies declared in `package.json`:
 
-## Resume and skills
+- React 19 and React DOM.
+- Vite 6 with the React plugin.
+- React Router v6.
+- Tailwind CSS 4, imported in `src/styles.css` and integrated through the Vite plugin.
+- Framer Motion 12.
+- Fontsource packages for Cinzel and Inter.
 
-Add the real, phone-free resume at `public/Vikramaditya_Singh_Resume.pdf`, review its visible text and PDF metadata for private information, and rebuild. Until then the download is disabled with an unavailable note. No PDF was supplied during the audit, so PDF contents could not be verified.
+Web3Forms is accessed through browser `fetch`, and Vercel is configured through `vercel.json`; neither is an npm dependency.
 
-Optionally fill category/top-skill `owlGrade` fields in `src/data.js`. Only O, E, or A are accepted for public category badges. Unset grades remain hidden; no proficiency is guessed. Project incantations are clearly labeled documented flow notes, not fabricated executable code.
+## Getting started
 
-## Routes and hosting
+Install Git, Node.js, and npm. The repository specifies no Node `engines` field and has no `.nvmrc` or `.node-version`. Setup was verified with Node.js 22.14.0 and npm 10.9.2.
 
-Routes: `/`, `/about`, `/projects`, `/projects/vaultify`, `/projects/unspoken`, `/projects/equilibria`, `/projects/prahari`, `/skills`, `/trophies`, `/journey`, `/contact`; unknown paths show the themed 404. Filters use `?tag=`. The sitemap lists the 11 real pages, not the 404 or filter variants.
+Replace `<repository-url>` with your repository or fork URL:
 
-For Vercel, build with `npm run build`, publish `dist`, and retain `vercel.json`. It includes the SPA fallback plus nosniff, strict-origin-when-cross-origin, and DENY frame headers. Verify the headers against the actual Vercel deployment; localhost Vite and Sites do not automatically apply Vercel configuration. Sites deployment uses `.openai/hosting.json` and the existing private audience.
+```sh
+git clone <repository-url> portfolio
+cd portfolio
+npm install
+cp .env.example .env
+npm run dev
+```
 
-The build writes unique title, description, canonical, Open Graph, and Twitter metadata into each route's HTML; client navigation updates the same tags. Canonicals and sitemap URLs use `siteSeo.origin` in `data.js`. Change that one value if moving to a different production domain, then rebuild. `public/og-image.svg` is the original artwork; `public/og-image.png` is its rasterized sharing version. The icon is an original geometric V seal. No raster image is rendered in page content.
+`cp` works in Bash and as a PowerShell alias. Set the optional contact key in `.env` before starting development. Follow the local URL printed by Vite; it uses an available port on `127.0.0.1`. Stop the server with Ctrl+C.
 
-## Accessibility and settings
+Every package script:
 
-Lumos/Nox and Muggle Mode persist with storage-error handling. An inline bootstrap sets theme/motion attributes before React. System reduced-motion defaults to plain mode unless the user has selected otherwise; motion remains disabled under the OS preference even if plain mode is turned off. The map, train, diagrams, owl, flame, particles, and Patronus respect the shared quiet setting.
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server. |
+| `npm run build` | Build the application and route metadata into `dist/`; generate robots and sitemap files. |
+| `npm run preview` | Serve the existing production build locally. Run the build first. |
+| `npm run check` | Check built metadata, content invariants, assets, headers, and environment hygiene; report JavaScript chunk sizes. Run after building. |
 
-Header/footer toggles, text navigation, a first-focusable skip link, gold focus rings, route-heading focus, native form controls, associated error messages, and live status messages are retained. Map dismissal restores trigger focus; map navigation focuses the destination heading. The wand cursor is restricted to fine-pointer hover devices and preserves native text-entry/focus cursors. Its bounded canvas pauses when hidden.
+The rate limiter also has a standalone test file (no `npm test` script):
 
-## Audit and performance
+```sh
+node --test scripts/form-rate-limit.test.mjs
+```
 
-See `AUDIT.md` for findings, scope, measurements, route chunk sizes, and outstanding setup. Routes, map, and contact animations are code-split. Fonts are Latin WOFF2 with swap display; primary Cinzel/Inter faces are preloaded. No runtime dependency was added for this audit. Lighthouse and the SVG rasterizer were installed only in ignored `.sites-runtime/audit-tools`.
+## Environment variables
 
-React Router v6 remains as explicitly requested. `npm audit` reports two moderate package entries arising from upstream open-redirect and SSR-hydration advisories. Current route destinations are fixed local data, and the application does not use SSR hydration/deserialization. The available upstream fix is v7.18.5, a major upgrade; this remains a documented dependency risk, not a clean audit claim. Plan a separate v7 migration if a zero-advisory policy is required.
+| Variable | Purpose and source | If missing |
+| --- | --- | --- |
+| `VITE_WEB3FORMS_KEY` | Public access key obtained from [Web3Forms](https://web3forms.com/) for Owl Post submissions. | Opens a prefilled `mailto:` draft; the visitor must send it from their email application. |
 
-## Bot verification and hosting protection
+Web3Forms access keys are public-facing by design. Vite embeds `VITE_` variables in the browser bundle; never use them for private secrets. Restrict the key to the production domain in the Web3Forms dashboard where supported by your plan. Enable server-side hCaptcha enforcement under the form's **Block Spam** settings; the client already loads hCaptcha and submits its token.
 
-hCaptcha loads only on the configured contact page, using Web3Forms’ documented shared public site key. CAPTCHA tokens are included in submissions and cleared after each attempt or expiry. In the Web3Forms dashboard, open this form and enable **hCaptcha** under **Block Spam** to require verification server-side; client checks alone are bypassable. If available on your plan, restrict submissions to your production domain. Domain restriction is a Web3Forms Pro feature.
+Keep `.env.example` blank. `.env` and local environment files are ignored by Git. Rebuild and redeploy after changing the production key.
 
-Site availability protection belongs at your hosting/CDN firewall (Sites, Vercel, or Cloudflare). This static application cannot guarantee protection against DDoS, and the local rate limiter must never be described as an IP/server limiter. No proxy or private backend secret was added.
+## Customizing content
 
-Run `node --test scripts/form-rate-limit.test.mjs` to verify cooldown, rolling-window capacity, persistence, concurrent reservations, unavailable storage, and provider backoff. No test emails are sent by this test. Complete CAPTCHA yourself and send one real message to check email delivery after deployment.
+`src/data.js` centralizes portfolio facts and configuration:
+
+- `profile`, education, professional links, and page copy.
+- `projects`: slugs, titles, stacks, descriptions, contributor flags, GitHub links, and diagram definitions.
+- `skills`: categories, items, and category/top-skill `owlGrade` fields. Only category grades set to `O`, `E`, or `A` render; unset grades stay hidden. Top-skill grades are stored but not displayed.
+- `trophies`, certifications, courses, and the Aarohan award. Their `credentialUrl` fields control optional Verify links; an empty value renders no link.
+- `journey`: station content and displayed dates. `sortKey` is not displayed.
+- `siteSeo`: production origin and route metadata.
+
+Some interface labels remain in page/component JSX; not every displayed string is data-driven. Project incantations are documented flow notes, not executable examples.
+
+The resume is already included at `public/Vikramaditya_Singh_Resume.pdf`. Replace that file to update the download, review its text and metadata for private information, and rebuild. If absent at build time, download controls are disabled.
+
+## Project structure
+
+```text
+src/
+  App.jsx              Lazy routes and page transitions
+  main.jsx             React entry point and BrowserRouter
+  data.js              Portfolio data, links, copy, and SEO settings
+  styles.css           Theme, layout, responsive styles, and shared buttons
+  fonts.css            Latin font faces with swap loading
+  pages/               Route components
+  components/          Navigation, cards, diagrams, forms, and effects
+  context/             Persistent theme and Muggle Mode settings
+  lib/                 Browser-side form rate limiter
+public/                Resume PDF, favicon, and social-sharing artwork
+scripts/               SEO build plugin, site checks, and rate-limiter tests
+index.html             Document shell, font preloads, and theme bootstrap
+package.json           Dependencies and npm scripts
+package-lock.json      Dependency lockfile
+vite.config.js         React, Tailwind, and SEO build plugins
+vercel.json            SPA rewrite and security headers
+.env.example           Blank contact-key template
+AUDIT.md               Dated audit findings and measurements
+dist/                  Generated production output; ignored by Git
+```
+
+## Accessibility and performance
+
+Keyboard navigation includes a skip link, visible focus rings, map-dialog focus trapping and Escape dismissal. Route changes reset scroll and focus the page heading. Forms associate inline errors with fields and announce status; SVG architecture diagrams have text alternatives.
+
+OS `prefers-reduced-motion` and Muggle Mode disable decorative motion. Muggle Mode also simplifies styling and substitutes text navigation for the map. Routes and selected effects are lazy-loaded; local Latin WOFF2 fonts use `font-display: swap` and primary-face preloads.
+
+[The audit dated November 4, 2026](AUDIT.md) records these mobile Lighthouse measurements on a **local production preview with simulated throttling**, not the live deployment:
+
+| Page | Performance | Accessibility | Best practices | SEO |
+| --- | ---: | ---: | ---: | ---: |
+| Home | 96 | 100 | 100 | 100 |
+| Projects | 96 | 100 | 100 | 100 |
+
+These historical results predate later changes and vary by host/device. Automated checks do not replace assistive-technology user testing.
+
+## Deployment
+
+1. Import the repository into Vercel and select the **Vite** preset.
+2. Use `npm run build` as the build command and `dist` as the output directory.
+3. Add `VITE_WEB3FORMS_KEY` to the deployment environment, then deploy.
+4. Set `siteSeo.origin` in `src/data.js` to the production domain and rebuild. Canonical URLs, `dist/sitemap.xml`, and `dist/robots.txt` must use that domain; `scripts/seo.mjs` generates them.
+5. Verify direct-route loading, response headers, crawlability, and contact delivery on the deployed site.
+
+`vercel.json` rewrites `/(.*)` to `/index.html` for SPA navigation and configures `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, and `X-Frame-Options: DENY`. Vite's local servers do not apply these Vercel headers.
+
+## Known limitations
+
+- React Router v6 retains the advisories documented in [AUDIT.md](AUDIT.md); installation verification still reported two moderate vulnerabilities. Fixed local destinations and the client-only SPA limit relevant exposure, but do not eliminate dependency risk. A separate v7 migration is planned; it is not implemented here.
+- Unknown routes display a themed 404 with `noindex`, but SPA hosting can still return HTTP 200.
+- Browser-side cooldowns, persisted attempt limits, and the honeypot are bypassable. They are not server-side rate limiting or DDoS protection; enforce protection through Web3Forms and the host.
+- Real email delivery and dashboard protection settings require a manual deployment test. No test email was sent during README verification.
+- Grades remain optional and unset. Review production-domain metadata, hosting headers, and public access after deployment.
+- The audit's missing-resume note is historical: the PDF is now present. Its numeric-plaque removal was also superseded by the resume-stat clarification in that document.
+
+## Disclaimer
+
+Fan-made tribute. Not affiliated with or endorsed by Warner Bros., J.K. Rowling, or any rights holder. All Harry Potter related names are trademarks of their respective owners. This site is non-commercial. Artwork is original.
+
+## Contact and license
+
+- [GitHub](https://github.com/VikTheBuilder)
+- [LinkedIn](https://linkedin.com/in/vikthebuilder)
+- [Email](mailto:vikthebuilder@gmail.com): vikthebuilder@gmail.com
+
+Personal content, including resume text, project descriptions, and the name, is not licensed for reuse.
