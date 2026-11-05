@@ -4,4 +4,6 @@ import {BrowserRouter} from 'react-router-dom';
 import './fonts.css';
 import './styles.css';
 import App from './App';
+import {loadAnalytics} from './analytics';
 createRoot(document.getElementById('root')).render(<React.StrictMode><BrowserRouter future={{v7_startTransition:true,v7_relativeSplatPath:true}}><App/></BrowserRouter></React.StrictMode>);
+loadAnalytics();

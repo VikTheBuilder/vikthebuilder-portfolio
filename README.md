@@ -1,8 +1,8 @@
-# Vikramaditya Singh | Developer Portfolio.
+# Vikramaditya Singh | Developer Portfolio
 
 A Gryffindor-inspired portfolio presenting projects, skills, achievements, education, and contact information.
 
-
+[Live site](https://vik-the-builder.vercel.app/)
 
 ## Features
 
@@ -64,6 +64,8 @@ node --test scripts/form-rate-limit.test.mjs
 | `VITE_WEB3FORMS_KEY` | Public access key obtained from [Web3Forms](https://web3forms.com/) for Owl Post submissions. | Opens a prefilled `mailto:` draft; the visitor must send it from their email application. |
 
 Web3Forms access keys are public-facing by design. Vite embeds `VITE_` variables in the browser bundle; never use them for private secrets. Restrict the key to the production domain in the Web3Forms dashboard where supported by your plan. Enable server-side hCaptcha enforcement under the form's **Block Spam** settings; the client already loads hCaptcha and submits its token.
+
+For optional [Umami Cloud](https://umami.is/) analytics, add `vik-the-builder.vercel.app` as a website in Umami, then set `VITE_UMAMI_WEBSITE_ID` to its website ID in Vercel’s Production environment and redeploy. Its cookie-free tracker loads asynchronously only in production builds on this exact production origin. It stays disabled without an ID, skips Do Not Track visitors, and excludes URL queries and hashes. SPA pageviews are tracked automatically; no form contents or custom events are sent by this integration.
 
 Keep `.env.example` blank. `.env` and local environment files are ignored by Git. Rebuild and redeploy after changing the production key.
 

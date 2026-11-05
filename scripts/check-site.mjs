@@ -14,7 +14,7 @@ for(const route of routes){const html=fs.readFileSync(path.join('dist',route.sli
 assert.equal(titles.size,routes.length);assert.equal(descriptions.size,routes.length);
 const sitemap=fs.readFileSync('dist/sitemap.xml','utf8');assert.equal((sitemap.match(/<url>/g)||[]).length,routes.length);assert(fs.readFileSync('dist/robots.txt','utf8').includes(siteSeo.origin));
 assert(fs.existsSync('dist/og-image.png'));assert(fs.existsSync('dist/favicon.svg'));
-assert.equal(fs.readFileSync('.env.example','utf8').trim(),'VITE_WEB3FORMS_KEY=');
+assert.deepEqual(fs.readFileSync('.env.example','utf8').trim().split(/\r?\n/),['VITE_WEB3FORMS_KEY=','VITE_UMAMI_WEBSITE_ID=']);
 assert(fs.readFileSync('.gitignore','utf8').split(/\r?\n/).includes('.env'));
 const config=JSON.parse(fs.readFileSync('vercel.json'));assert(config.rewrites.some(r=>r.destination==='/index.html'));for(const key of ['X-Content-Type-Options','Referrer-Policy','X-Frame-Options'])assert(config.headers[0].headers.some(h=>h.key===key));
 function files(root){return fs.readdirSync(root,{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(path.join(root,e.name)):[path.join(root,e.name)])}
